@@ -27,6 +27,10 @@ module.exports = {
     'pay/notify',
     'order/list',
     'city/list',
-    'waste/findtype'
+    'waste/findtype',
+    'address/add',
+    'address/get',
+    'address/del',
+    'order/add'
   ]
 };

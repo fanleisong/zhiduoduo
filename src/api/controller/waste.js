@@ -7,6 +7,11 @@ module.exports = class extends Base {
    */
   async findtypeAction() {
     const wasteList = await this.model('waste').where({parentId:'4'}).select();
+    for (const item of wasteList) {
+      const wasteListReturn =  await this.model('waste').where({parentId:item.id}).select();
+      item.wasteReturns = wasteListReturn;
+    }
+    
     return this.success(wasteList);
   }
 

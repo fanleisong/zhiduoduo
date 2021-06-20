@@ -51,7 +51,8 @@ module.exports = class extends Base {
     if (think.isEmpty(sessionKey)) {
       return this.fail('生成 token 失败');
     }
-
+    newUserInfo.openid = userInfo.openid
+console.log(newUserInfo)
     return this.success({ token: sessionKey, userInfo: newUserInfo });
       }
     
