@@ -14,18 +14,16 @@ module.exports = class extends Base {
       const orderList = await this.model('order').where({ openid: openid}).select();
       for(var item of orderList){
         item.wasteTypeOrderRelaList = await this.model('order_express').where({ orderId: item.orderId }).select();
-        console.log("==")
+        //console.log("==")
       }
-    console.log(orderList)
+   // console.log(orderList)
       return this.success(orderList);
 
     }else{  const   orderList = await this.model('order').where({ openid: openid, orderStatus:orderStatus}).select();
   
     for(var item of orderList){
       item.wasteTypeOrderRelaList = await this.model('order_express').where({ orderId: item.orderId }).select();
-      console.log("==")
     }
-  console.log(orderList)
     return this.success(orderList);
   }
 
@@ -130,7 +128,7 @@ module.exports = class extends Base {
 
   /**
    * 删除订单列表
-   * 樊雷松
+   * fanleisong
    * @return {Promise} []
    */
    async deleteAction() {
@@ -140,5 +138,16 @@ module.exports = class extends Base {
     await this.model('order_goods').where({ order_id: orderInfo.id }).delete();
     const delteresult = await this.model('order').where({ order_sn: order_sn }).delete();
     return this.success(delteresult);
+    }
+
+  /**
+   * 订单评价
+   * fanleisong
+   * @return {Promise} []
+   */
+   async setstarAction() {
+    const star = this.post('star'),orderid = this.post('orderid');
+    const affectedRows = await this.model('order').where({orderId: orderid}).update({star: star});
+    return this.success(affectedRows);
     }
 };

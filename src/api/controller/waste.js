@@ -16,6 +16,16 @@ module.exports = class extends Base {
   }
 
   /**
+   * 获取购物车中的数据
+   * @returns {Promise.<{cartList: *, cartTotal: {goodsCount: number, goodsAmount: number, checkedGoodsCount: number, checkedGoodsAmount: number}}>}
+   */
+   async getpriceAction() {
+    const wasteList = await this.model('waste').where({price: {'>': 0}}).select();
+  
+    return this.success(wasteList);
+  }
+
+  /**
    * 获取购物车信息，所有对购物车的增删改操作，都要重新返回购物车的信息
    * @return {Promise} []
    */

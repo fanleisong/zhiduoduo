@@ -28,9 +28,13 @@ module.exports = {
     'order/list',
     'city/list',
     'waste/findtype',
+    'waste/getprice',
     'address/add',
     'address/get',
     'address/del',
-    'order/add'
+    'order/add',
+    'order/setstar',
+    'advice/get',
+    'advice/add'
   ]
 };

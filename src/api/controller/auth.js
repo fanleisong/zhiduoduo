@@ -8,8 +8,26 @@ module.exports = class extends Base {
 
     if (typeof(fullUserInfo) == "undefined"){ 
       const { errno, errmsg, data: userInfo } = await this.service('weixin', 'api').logincode(code);
+      console.log(userInfo);
+      let userId = await this.model('user').where({ weixin_openid: userInfo.openid }).getField('id', true);
+     // 查询用户信息
+    const newUserInfo = await this.model('user').field(['id', 'username', 'nickname', 'gender', 'avatar', 'birthday']).where({ id: userId }).find();
 
-       
+    // 更新登录信息
+    await this.model('user').where({ id: userId }).update({
+      last_login_time: parseInt(new Date().getTime() / 1000),
+      last_login_ip: clientIp
+    });
+
+    const TokenSerivce = this.service('token', 'api');
+    const sessionKey = await TokenSerivce.create({ user_id: userId });
+
+    if (think.isEmpty(sessionKey)) {
+      return this.fail('生成 token 失败');
+    }
+    newUserInfo.openid = userInfo.openid
+console.log(newUserInfo)
+    return this.success({ token: sessionKey, userInfo: newUserInfo });
       }else{
     
         const { errno, errmsg, data: userInfo } = await this.service('weixin', 'api').login(code, fullUserInfo);
