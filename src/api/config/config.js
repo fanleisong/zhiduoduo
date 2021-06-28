@@ -35,6 +35,8 @@ module.exports = {
     'order/add',
     'order/setstar',
     'advice/get',
-    'advice/add'
+    'advice/add',
+    'user/info',
+    'user/saveimage'
   ]
 };

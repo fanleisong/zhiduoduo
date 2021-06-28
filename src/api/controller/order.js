@@ -52,10 +52,11 @@ module.exports = class extends Base {
         realLongitude:e.realLongitude,
         realAddress:e.realAddress,
         userid:uu.id,
-        orderStatus:'ORDER_SUBMIT'
+        orderStatus:'ORDER_SUBMIT',
+        subTime:think.datetime(new Date(e.time))
         
       };
-     // console.log(orderInfo)
+     console.log(orderInfo)
       e.wasteTypeOrderRelaList.forEach(element => {
         element.orderId = orderInfo.orderId
          this.model('order_express').add(element);

@@ -14,5 +14,7 @@ module.exports = {
     appid: '', // 对应快递鸟用户后台 用户ID
     appkey: '', // 对应快递鸟用户后台 API key
     request_url: 'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx'
-  }
+  },
+  resource_on: true, //是否开启静态资源解析功能
+  resource_reg: /^(static\/|[^\/]+\.(?!js|html|png)\w+$)/, //判断为静态资源请求的正则
 };
