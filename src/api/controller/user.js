@@ -3,6 +3,13 @@ const fs = require('fs');
 const _ = require('lodash');
 
 module.exports = class extends Base {
+  async qishouAction() {
+    const data = this.post('id'),qimages = this.post('qimages'),qname = this.post('qname')
+    console.log(qname)
+    return this.success({msg:'提交成功，请等待客服联系'});
+  }
+
+
   async infoAction() {
     const id = this.post('id');
     const userInfo = await this.model('user').where({id: id}).find();
@@ -26,12 +33,14 @@ module.exports = class extends Base {
       //   console.log(res)
       //   return this.success();
       // });
+      console.log(avatar.path,{test:"tt"})
       var readStream=fs.createReadStream(avatar.path);
       var writeStream=fs.createWriteStream(avatarPath);
       readStream.pipe(writeStream);
-      readStream.on('end',function(){
-        return that.success();
-      });
+      // readStream.on('end',function(){
+      //   return that.success(avatarPath,{test:"tt"});
+      // });
+      return that.success({url1:filePath,msg:"上传成功"});
     }
 
   /**

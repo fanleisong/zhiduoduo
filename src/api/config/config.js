@@ -37,6 +37,7 @@ module.exports = {
     'advice/get',
     'advice/add',
     'user/info',
-    'user/saveimage'
+    'user/saveimage',
+    'user/qishou'
   ]
 };
